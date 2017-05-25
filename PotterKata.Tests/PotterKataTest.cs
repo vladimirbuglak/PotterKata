@@ -152,5 +152,53 @@ namespace PotterKata.Tests
             var priceCalculator = new PriceCalculator(new DiscountInformation());
             Assert.AreEqual(75.2m, priceCalculator.Calculate(basket.GetBooks()));
         }
+
+        [TestMethod]
+        public void Test_14_Books_With_7_Discount_Book()
+        {
+            var basket = new Basket(new List<Book>
+            {
+                new Book { Serie = 1 },
+                new Book { Serie = 2 },
+                new Book { Serie = 3 },
+                new Book { Serie = 4 },
+                new Book { Serie = 5 },
+                new Book { Serie = 6 },
+                new Book { Serie = 7 },
+
+                new Book { Serie = 1 },
+                new Book { Serie = 2 },
+                new Book { Serie = 3 },
+                new Book { Serie = 4 },
+                new Book { Serie = 5 },
+                new Book { Serie = 6 },
+                new Book { Serie = 7 }
+            });
+
+            var priceCalculator = new PriceCalculator(new DiscountInformation());
+            Assert.AreEqual(92.4m, priceCalculator.Calculate(basket.GetBooks()));
+        }
+
+        [TestMethod]
+        public void Test_10_Books_With_2_Discount_Book()
+        {
+            var basket = new Basket(new List<Book>
+            {
+                new Book { Serie = 1 },
+                new Book { Serie = 1 },
+                new Book { Serie = 1 },
+                new Book { Serie = 1 },
+                new Book { Serie = 1 },
+                new Book { Serie = 1 },
+                new Book { Serie = 1 },
+                new Book { Serie = 1 },
+                new Book { Serie = 1 },
+
+                new Book { Serie = 4 },
+            });
+
+            var priceCalculator = new PriceCalculator(new DiscountInformation());
+            Assert.AreEqual(79.2m, priceCalculator.Calculate(basket.GetBooks()));
+        }
     }
 }
