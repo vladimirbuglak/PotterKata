@@ -2,7 +2,7 @@
 
 namespace PotterKata.BusinessLogic
 {
-    public class DiscountInformation
+    public class DiscountInformation : IDiscountInformation
     {
         public Dictionary<int, decimal> Discounts { get; set; }
 
@@ -19,13 +19,13 @@ namespace PotterKata.BusinessLogic
             };
         }
 
-        public decimal Get(int count)
+        public decimal Get(int countOfUniqueBookSeries)
         {
-            if (count > 7)
+            if (countOfUniqueBookSeries > 7)
             {
                 return 35;
             }
-            return count < 2 ? 0 : Discounts[count];
+            return countOfUniqueBookSeries < 2 ? 0 : Discounts[countOfUniqueBookSeries];
         }
     }
 }

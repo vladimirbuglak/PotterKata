@@ -7,11 +7,11 @@ namespace PotterKata.BusinessLogic.Services
     public class PriceCalculator
     {
         private const decimal Price = 8;
-        private DiscountInformation DiscountInformation { get; }
+        private IDiscountInformation DiscountInformation { get; }
 
-        public PriceCalculator()
+        public PriceCalculator(IDiscountInformation discountInformation)
         {
-            DiscountInformation = new DiscountInformation();
+            DiscountInformation = discountInformation;
         }
 
         public decimal Calculate(ICollection<Book> books)

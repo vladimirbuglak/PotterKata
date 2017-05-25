@@ -26,7 +26,7 @@ namespace PotterKata.Tests
                 new Book { Serie = 6 }
             });
 
-            var priceCalculator = new PriceCalculator();
+            var priceCalculator = new PriceCalculator(new DiscountInformation());
             Assert.AreEqual(65.6m, priceCalculator.Calculate(basket.GetBooks()));
         }
 
@@ -58,7 +58,7 @@ namespace PotterKata.Tests
                 new Book { Serie = 6 }
             });
 
-            var priceCalculator = new PriceCalculator();
+            var priceCalculator = new PriceCalculator(new DiscountInformation());
             Assert.AreEqual(145.6m, priceCalculator.Calculate(basket.GetBooks()));
         }
 
@@ -71,7 +71,7 @@ namespace PotterKata.Tests
                 new Book {Serie = 2}
             });
 
-            var priceCalculator = new PriceCalculator();
+            var priceCalculator = new PriceCalculator(new DiscountInformation());
             Assert.AreEqual(15.2m, priceCalculator.Calculate(basket.GetBooks()));
         }
 
@@ -80,7 +80,7 @@ namespace PotterKata.Tests
         {
             var basket = new Basket(new List<Book> { });
 
-            var priceCalculator = new PriceCalculator();
+            var priceCalculator = new PriceCalculator(new DiscountInformation());
             Assert.AreEqual(0m, priceCalculator.Calculate(basket.GetBooks()));
         }
 
@@ -98,8 +98,59 @@ namespace PotterKata.Tests
                 new Book { Serie = 7 }
             });
 
-            var priceCalculator = new PriceCalculator();
+            var priceCalculator = new PriceCalculator(new DiscountInformation());
             Assert.AreEqual(36.4m, priceCalculator.Calculate(basket.GetBooks()));
+        }
+
+        [TestMethod]
+        public void Test_2_Books_With_Same_Serie()
+        {
+            var basket = new Basket(new List<Book>
+            {
+                new Book { Serie = 1 },
+                new Book { Serie = 1 }
+            });
+
+            var priceCalculator = new PriceCalculator(new DiscountInformation());
+            Assert.AreEqual(16m, priceCalculator.Calculate(basket.GetBooks()));
+        }
+
+        [TestMethod]
+        public void Test_3_Books_With_Same_Serie()
+        {
+            var basket = new Basket(new List<Book>
+            {
+                new Book { Serie = 1 },
+                new Book { Serie = 1 },
+                new Book { Serie = 1 }
+            });
+
+            var priceCalculator = new PriceCalculator(new DiscountInformation());
+            Assert.AreEqual(24m, priceCalculator.Calculate(basket.GetBooks()));
+        }
+
+        [TestMethod]
+        public void Test_10_Books_With_4_Discount_Book()
+        {
+            var basket = new Basket(new List<Book>
+            {
+                new Book { Serie = 1 },
+                new Book { Serie = 1 },
+                new Book { Serie = 1 },
+
+                new Book { Serie = 2 },
+                new Book { Serie = 2 },
+                new Book { Serie = 2 },
+
+                new Book { Serie = 3 },
+                new Book { Serie = 3 },
+                new Book { Serie = 3 },
+
+                new Book { Serie = 4 },
+            });
+
+            var priceCalculator = new PriceCalculator(new DiscountInformation());
+            Assert.AreEqual(75.2m, priceCalculator.Calculate(basket.GetBooks()));
         }
     }
 }
